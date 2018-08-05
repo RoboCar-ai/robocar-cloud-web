@@ -1,4 +1,5 @@
 import React from 'react';
+import SessionList from './SessionsList';
 
 export default class Sessions extends React.Component {
   state = {
@@ -17,11 +18,10 @@ export default class Sessions extends React.Component {
   }
 
   render() {
-    console.log('sesisions', this.state.sessions)
+    console.log('context sess', this.context)
     return (
       <div>
-        <h2>Sessions</h2>
-        {this.state.sessions}
+        <SessionList sessions={this.state.sessions} />
       </div>
     );
   }

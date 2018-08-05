@@ -29,8 +29,7 @@ class RoboNav extends React.Component {
   } 
   
   render() {
-    const { classes } = this.props;
-    
+    const { classes, title } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -39,7 +38,7 @@ class RoboNav extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              News
+              {title}
             </Typography>
             <Button color="inherit">Login</Button>
           </Toolbar>
@@ -63,7 +62,8 @@ class RoboNav extends React.Component {
 }
 
 RoboNav.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  title: PropTypes.string
 };
 
 export default withStyles(styles)(RoboNav);
