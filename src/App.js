@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Sessions from './sessions/Sessions';
 import Status from './status/Status';
+import Callback from './callback/Callback';
 import Nav from './navigation/Nav';
 
 import './App.css';
@@ -17,7 +18,13 @@ const routeConfig = [
     name: 'Sessions',
     path: '/sessions',
     component: Sessions
+  },
+  {
+    name: 'Callback',
+    path: '/callback',
+    component: Callback
   }
+
 ]
 
 function getRouteByPath(path) {

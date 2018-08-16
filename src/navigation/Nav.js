@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Drawer from './Drawer';
+import { login, logout, isLoggedIn } from '../utils/AuthService';
 
 const styles = {
   root: {
@@ -40,7 +41,9 @@ class RoboNav extends React.Component {
             <Typography variant="title" color="inherit" className={classes.flex}>
               {title}
             </Typography>
-            <Button color="inherit">Login</Button>
+            {
+               (isLoggedIn()) ? ( <Button color="inherit" onClick={() => logout()}>Logout</Button> ) : ( <Button color="inherit" onClick={() => login()}>Login</Button> )
+            }
           </Toolbar>
         </AppBar>
         <Drawer open={this.state.showMenu} closeRequest={this.drawerCloseRequested}/>
