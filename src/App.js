@@ -25,7 +25,7 @@ const routeConfig = [
     component: Callback
   }
 
-]
+];  
 
 function getRouteByPath(path) {
   return routeConfig.find(r => path === r.path);
