@@ -30,6 +30,11 @@ class SessionCreateForm extends React.Component {
     });
   }
 
+  handleNewSession = _ => {
+    this.props.handleNewSession(this.state.name);
+    this.setState({name: ''})
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -40,10 +45,11 @@ class SessionCreateForm extends React.Component {
           label="New Session Name"
           onChange={this.handleChange}
           className={classes.textField}
+          value={this.state.name}
           margin="normal"
           variant="outlined"
         />
-        <Button variant="contained" size="small" color="primary" className={classes.buttonMargin} disabled={!this.state.name} >
+        <Button onClick={this.handleNewSession} variant="contained" size="small" color="primary" className={classes.buttonMargin} disabled={!this.state.name} >
           Create Session
         </Button>
       </form>

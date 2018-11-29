@@ -8,7 +8,6 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import DirectionsCar from '@material-ui/icons/DirectionsCar';
-import SessionCreateForm from './SessionCreateForm'
 
 const nestedStyle = {
   paddingLeft: '3em',
@@ -19,7 +18,6 @@ export default (props) => {
 
   return (
     <div>
-      <SessionCreateForm />
       <List dense={true}>
         {items.map((item, i) => <SessionItem key={i} session={item} open={false}/>)}
       </List>

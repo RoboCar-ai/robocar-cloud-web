@@ -1,25 +1,31 @@
 import React from 'react';
 import SessionList from './SessionsList';
+import SessionCreateForm from './SessionCreateForm'
+import {getSessions, createSession} from './sessions.repository'
 
 export default class Sessions extends React.Component {
   state = {
     sessions: []
   };
 
-  componentWillMount() {
-    console.log('updating sessions');
-    fetch('http://localhost:5000/sessions')
-      .then(res => res.json())
-      .then(s => {
-        console.log(s);
-        this.setState({sessions: s});
-      }).catch(console.log);
+  loadSessions = async () => {
+    const sessions = await getSessions()
+    this.setState({sessions: sessions});
+  }
+
+  async componentWillMount() {
+    this.loadSessions();
+  }
+
+  handleNewSession = async (name) => {
+    await createSession(name);
+    this.loadSessions();
   }
 
   render() {
-    console.log('context sess', this.context)
     return (
       <div>
+        <SessionCreateForm handleNewSession={this.handleNewSession}/>
         <SessionList sessions={this.state.sessions} open={true} />
       </div>
     );
