@@ -3,11 +3,11 @@ import auth0 from 'auth0-js';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-const CLIENT_ID = 'MWiY0uuz9Nsu_bZnnX8qhavvmF8ygMch';
-const CLIENT_DOMAIN = 'robocars.auth0.com';
-const REDIRECT = 'http://localhost:3000/callback';
-const SCOPE = 'read:client_grants';
-const AUDIENCE = 'https://robocars.auth0.com/api/v2/';
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+const CLIENT_DOMAIN = process.env.REACT_APP_CLIENT_DOMAIN;
+const REDIRECT = process.env.REACT_APP_REDIRECT;
+const SCOPE = process.env.REACT_APP_SCOPE;
+const AUDIENCE = process.env.REACT_APP_AUDIENCE;
 
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
@@ -73,6 +73,10 @@ export function setIdToken() {
 export function isLoggedIn() {
   const idToken = getIdToken();
   return !!idToken && !isTokenExpired(idToken);
+}
+
+export function isAuthenticated() {
+  return isLoggedIn();
 }
 
 function getTokenExpirationDate(encodedToken) {

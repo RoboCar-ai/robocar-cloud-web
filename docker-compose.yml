@@ -1,0 +1,7 @@
+version: '3'
+services:
+  ui:
+    image: blown302/robocar-ui
+    build: .
+    ports:
+      - 80:80

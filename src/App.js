@@ -4,6 +4,7 @@ import Sessions from './sessions/Sessions';
 import Status from './status/Status';
 import Callback from './callback/Callback';
 import Nav from './navigation/Nav';
+import {isAuthenticated, login} from './utils/AuthService'
 
 import './App.css';
 
@@ -12,17 +13,20 @@ const routeConfig = [
   {
     name: 'Status',
     path: '/',
-    component: Status
+    component: Status,
+    protected: true,
   },
   {
     name: 'Sessions',
     path: '/sessions',
-    component: Sessions
+    component: Sessions,
+    protected: true,
   },
   {
     name: 'Callback',
     path: '/callback',
-    component: Callback
+    component: Callback,
+    protected: false,
   }
 
 ];  
@@ -40,7 +44,12 @@ class App extends Component {
         <Router>
           <div>
             <Route path='/' render={p => <Nav title={getRouteByPath(p.location.pathname).name}/>} />
-            {routeConfig.map((r, i) => <Route key={i} path={r.path} exact={r.path === '/'} component={r.component} />)}
+            {routeConfig.map((r, i) => {
+                if (r.protected) 
+                 return (<PrivateRoute key={i} path={r.path} exact={r.path === '/'} component={r.component} />)
+                else
+                  return <Route key={i} path={r.path} exact={r.path === '/'} component={r.component} />
+              })}
             {/* <Route exact path="/" component={Status} />
             <Route path="/sessions" component={Sessions} /> */}
           </div>
@@ -49,5 +58,19 @@ class App extends Component {
     );
   }
 }
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render= {
+      props =>{
+        if (!isAuthenticated()) {
+          return login();
+        }
+        return (<Component {...props} />)
+      }
+    }
+  />
+);
 
 export default App;
